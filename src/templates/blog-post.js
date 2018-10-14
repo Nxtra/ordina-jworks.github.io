@@ -1,19 +1,16 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { Link } from 'gatsby'
-import get from 'lodash/get'
 import Layout from '../components/layout';
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import _ from 'lodash'
 import Banner from '../components/banner';
+import Navigation from '../components/navigation';
 
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-    const { previous, next } = this.props.pageContext
 
     let byAuthors = post.frontmatter.authors.map((author, index, array) => {
       if (index === 0) {
@@ -32,9 +29,11 @@ class BlogPostTemplate extends React.Component {
         <div id="header-image" className="header-image"
              style={{ backgroundImage: `url(${post.frontmatter.image.childImageSharp.resolutions.src})` }}></div>
         <div id="page-wrapper">
+          <Navigation/>
+
           <Banner
             title={post.frontmatter.title}
-            content={<>Posted {post.frontmatter.date} in {post.frontmatter.category} by {byAuthors}
+            content={<>Posted {post.frontmatter.date} in <Link to={_.kebabCase(post.frontmatter.category)}>{post.frontmatter.category}</Link> by {byAuthors}
               <br/>
               <i className="fa fa-tags"></i>&nbsp;
             {_.join(post.frontmatter.tags, ', ')}</>}

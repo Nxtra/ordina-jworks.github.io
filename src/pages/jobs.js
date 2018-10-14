@@ -1,9 +1,10 @@
 import React from 'react'
-import { graphql, Link, StaticQuery } from 'gatsby'
+import { graphql, StaticQuery } from 'gatsby'
 
 import Layout from '../components/layout'
 import Card from '../components/card';
 import Banner from '../components/banner';
+import Navigation from '../components/navigation';
 
 const JobsPage = () => (
   <StaticQuery
@@ -39,6 +40,7 @@ const JobsPage = () => (
       <Layout>
         <div id="header-image"></div>
         <div id="page-wrapper">
+          <Navigation/>
           <Banner title="Jobs" subtitle="Want to work with us?"/>
           <section id="wrapper">
             <div className="inner">

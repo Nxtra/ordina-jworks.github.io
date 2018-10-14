@@ -16,6 +16,7 @@ exports.createPages = ({ actions, graphql }) => {
     const blogPostTemplate = path.resolve('./src/templates/blog-post.js')
     const jobTemplate = path.resolve('./src/templates/job.js')
     const authorTemplate = path.resolve('./src/templates/author.js')
+    const categoryTemplate = path.resolve('./src/templates/category.js')
     resolve(
       graphql(
         `
@@ -29,6 +30,7 @@ exports.createPages = ({ actions, graphql }) => {
                   }
                   frontmatter {
                     title
+                    category
                   }
                 }
               }
@@ -51,11 +53,12 @@ exports.createPages = ({ actions, graphql }) => {
           reject(result.errors)
         }
 
-        const md = result.data.allMarkdownRemark.edges;
+        const md = result.data.allMarkdownRemark.edges
 
         // Create blog posts pages.
-        const posts = md.filter(post => post.node.fields.type === 'blog');
+        const posts = md.filter(post => post.node.fields.type === 'blog')
 
+        let categories = []
 
         _.each(posts, (post) => {
           createPage({
@@ -65,10 +68,26 @@ exports.createPages = ({ actions, graphql }) => {
               slug: post.node.fields.slug,
             },
           })
+
+          categories.push(_.kebabCase(post.node.frontmatter.category))
+        })
+
+
+        // Create category pages
+        const uniqueCategories = [...new Set(categories)]
+
+        _.each(uniqueCategories, (category) => {
+          createPage({
+            path: category,
+            component: categoryTemplate,
+            context: {
+              category: category
+            }
+          })
         })
 
         // Create job pages.
-        const jobs = md.filter(post => post.node.fields.type === 'job');
+        const jobs = md.filter(post => post.node.fields.type === 'job')
 
         _.each(jobs, (job) => {
           createPage({
@@ -150,6 +169,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         name: `type`,
         node,
         value: 'blog',
+      })
+
+      createNodeField({
+        name: `category_lower`,
+        node,
+        value: _.kebabCase(node.frontmatter.category),
       })
     }
 

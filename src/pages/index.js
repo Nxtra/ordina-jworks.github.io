@@ -1,11 +1,12 @@
 import React from 'react'
-import { graphql, Link, StaticQuery } from 'gatsby'
+import { graphql, StaticQuery } from 'gatsby'
 import { withPrefix } from 'gatsby'
 
 
 import Layout from '../components/layout'
 import Card from '../components/card';
 import Banner from '../components/banner';
+import Navigation from '../components/navigation';
 
 const IndexPage = () => (
   <StaticQuery
@@ -42,14 +43,17 @@ const IndexPage = () => (
     render={data => (
       <Layout>
         <div id="header-image"></div>
+
+        <Navigation transparant={true}/>
+
         <div id="page-wrapper">
           <Banner
             content={<>
               <div className="logo">
-                <img src={withPrefix('/img/jworks-200x200-white.png')} width="100"/>
+                <img src={withPrefix('/img/jworks-200x200-white.png')} alt="jworks logo" width="100"/>
               </div>
               <h2>JWorks Tech Blog</h2>
-              <p>Powered by <img src={withPrefix('/img/ordina-logo-orange-300px.png')} className="header-logo"/></p></>}
+              <p>Powered by <img src={withPrefix('/img/ordina-logo-orange-300px.png')} alt="ordina logo" className="header-logo"/></p></>}
           />
           <section id="wrapper">
             <div className="inner">

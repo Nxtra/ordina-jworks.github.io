@@ -1,22 +1,21 @@
 import React from 'react'
-import Helmet from 'react-helmet'
-import get from 'lodash/get'
 import TeamMemberLinks from '../components/teamMemberLinks';
 import TeamMemberImage from '../components/teamMemberImage';
 import Layout from '../components/layout';
 import { graphql } from 'gatsby'
 import Banner from '../components/banner';
+import Navigation from '../components/navigation';
 
 class AuthorTemplate extends React.Component {
   render() {
     const author = this.props.data.authorsYaml
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     const fullName = `${author.first_name} ${author.last_name}`
 
     return (
       <Layout>
         <div id="page-wrapper">
+          <Navigation/>
           <Banner
             title={fullName}
             content={<div className="banner-team-member-info">
@@ -54,6 +53,7 @@ class AuthorTemplate extends React.Component {
             </div>
           </section>
         </div>
+        <div id="over"></div>
       </Layout>
     )
   }
