@@ -5,6 +5,7 @@ import { withPrefix } from 'gatsby'
 
 import Layout from '../components/layout'
 import Card from '../components/card';
+import Banner from '../components/banner';
 
 const IndexPage = () => (
   <StaticQuery
@@ -42,17 +43,14 @@ const IndexPage = () => (
       <Layout>
         <div id="header-image"></div>
         <div id="page-wrapper">
-          <section id="banner">
-            <header>
-              <div className="inner">
-                <div className="logo">
-                  <img src={withPrefix('/img/jworks-200x200-white.png')} width="100"/>
-                </div>
-                <h2>JWorks Tech Blog</h2>
-                <p>Powered by <img src={withPrefix('/img/ordina-logo-orange-300px.png')} className="header-logo"/></p>
+          <Banner
+            content={<>
+              <div className="logo">
+                <img src={withPrefix('/img/jworks-200x200-white.png')} width="100"/>
               </div>
-            </header>
-          </section>
+              <h2>JWorks Tech Blog</h2>
+              <p>Powered by <img src={withPrefix('/img/ordina-logo-orange-300px.png')} className="header-logo"/></p></>}
+          />
           <section id="wrapper">
             <div className="inner">
               <section id="one" className="wrapper spotlight style1">
@@ -82,7 +80,6 @@ const IndexPage = () => (
       </Layout>
     )}
   />
-
 )
 
 export default IndexPage

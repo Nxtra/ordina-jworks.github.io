@@ -6,6 +6,7 @@ import Layout from '../components/layout';
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import _ from 'lodash'
+import Banner from '../components/banner';
 
 
 class BlogPostTemplate extends React.Component {
@@ -31,17 +32,13 @@ class BlogPostTemplate extends React.Component {
         <div id="header-image" className="header-image"
              style={{ backgroundImage: `url(${post.frontmatter.image.childImageSharp.resolutions.src})` }}></div>
         <div id="page-wrapper">
-          <section id="banner">
-            <header>
-              <div className="inner">
-                <h2>{post.frontmatter.title}</h2>
-                Posted {post.frontmatter.date} in {post.frontmatter.category} by {byAuthors}
-                <br/>
-                <i className="fa fa-tags"></i>&nbsp;
-                {_.join(post.frontmatter.tags, ', ')}
-              </div>
-            </header>
-          </section>
+          <Banner
+            title={post.frontmatter.title}
+            content={<>Posted {post.frontmatter.date} in {post.frontmatter.category} by {byAuthors}
+              <br/>
+              <i className="fa fa-tags"></i>&nbsp;
+            {_.join(post.frontmatter.tags, ', ')}</>}
+          />
           <section id="wrapper">
             <div className="inner">
               <section id="one" className="wrapper spotlight style1 post-body">

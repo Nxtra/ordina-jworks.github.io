@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/layout';
 import { graphql } from 'gatsby'
+import Banner from '../components/banner';
 
 class JobTemplate extends React.Component {
   render() {
@@ -11,14 +12,7 @@ class JobTemplate extends React.Component {
         <div id="header-image" className="header-image"
              style={{ backgroundImage: `url(${job.frontmatter.image.childImageSharp.resolutions.src})` }}></div>
         <div id="page-wrapper">
-          <section id="banner">
-            <header>
-              <div className="inner">
-                <h2>{job.frontmatter.title}</h2>
-                <p>{job.frontmatter.subtitle}</p>
-              </div>
-            </header>
-          </section>
+          <Banner title={job.frontmatter.title} subtitle={job.frontmatter.subtitle}/>
           <div id="page-wrapper">
             <section id="wrapper">
               <div className="inner" dangerouslySetInnerHTML={{ __html: job.html }}>

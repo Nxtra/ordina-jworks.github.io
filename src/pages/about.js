@@ -3,6 +3,7 @@ import { StaticQuery, Link, graphql } from "gatsby"
 import TeamMemberImage from '../components/teamMemberImage';
 import TeamMemberLinks from '../components/teamMemberLinks';
 import Layout from '../components/layout';
+import Banner from '../components/banner';
 
 const AboutPage = () => (
   <StaticQuery
@@ -43,13 +44,7 @@ const AboutPage = () => (
     render={data => (
       <Layout>
         <div id="page-wrapper">
-          <section id="banner">
-            <header>
-              <div className="inner">
-                <h2>Team</h2>
-              </div>
-            </header>
-          </section>
+          <Banner title="Team"/>
           <section id="wrapper">
             <div className="inner">
               <section className="wrapper spotlight alt style1">
@@ -58,7 +53,7 @@ const AboutPage = () => (
                     {data.allAuthorsYaml.edges.map(({ node }) => {
                       const fullName = node.first_name + ' ' + node.last_name;
                       return (
-                        <div className="team-member">
+                        <div className="team-member" key={node.id}>
                           <TeamMemberImage
                             key={node.id}
                             firstName={node.first_name}

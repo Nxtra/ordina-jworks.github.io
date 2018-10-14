@@ -5,6 +5,7 @@ import TeamMemberLinks from '../components/teamMemberLinks';
 import TeamMemberImage from '../components/teamMemberImage';
 import Layout from '../components/layout';
 import { graphql } from 'gatsby'
+import Banner from '../components/banner';
 
 class AuthorTemplate extends React.Component {
   render() {
@@ -16,11 +17,9 @@ class AuthorTemplate extends React.Component {
     return (
       <Layout>
         <div id="page-wrapper">
-          <section id="banner">
-            <header>
-              <div className="inner">
-                <h2>{fullName}</h2>
-                <div className="banner-team-member-info">
+          <Banner
+            title={fullName}
+            content={<div className="banner-team-member-info">
                   <TeamMemberImage
                     firstName={author.first_name}
                     image={author.avatar.childImageSharp.fluid}
@@ -42,10 +41,8 @@ class AuthorTemplate extends React.Component {
                       linkedin={author.linkedin}
                     />
                   </div>
-                </div>
-              </div>
-            </header>
-          </section>
+                </div>}
+          />
           <section id="wrapper">
             <div className="inner">
               <section className="wrapper style1">

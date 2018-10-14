@@ -3,6 +3,7 @@ import { graphql, Link, StaticQuery } from 'gatsby'
 
 import Layout from '../components/layout'
 import Card from '../components/card';
+import Banner from '../components/banner';
 
 const JobsPage = () => (
   <StaticQuery
@@ -38,14 +39,7 @@ const JobsPage = () => (
       <Layout>
         <div id="header-image"></div>
         <div id="page-wrapper">
-          <section id="banner">
-            <header>
-              <div className="inner">
-                <h2>Jobs</h2>
-                <p>Want to work with us?</p>
-              </div>
-            </header>
-          </section>
+          <Banner title="Jobs" subtitle="Want to work with us?"/>
           <section id="wrapper">
             <div className="inner">
               <section id="four" className="wrapper alt style1">
