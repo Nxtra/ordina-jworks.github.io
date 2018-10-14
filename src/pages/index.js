@@ -26,8 +26,8 @@ const IndexPage = () => (
                 date(formatString: "DD MMM YYYY")
                 image {
                   childImageSharp {
-                    resolutions(width: 500, height: 293, quality:100) {
-                      src
+                    fluid(maxWidth: 500, quality: 100) {
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }
@@ -67,7 +67,7 @@ const IndexPage = () => (
                             subtitle={node.frontmatter.date}
                             action="Read more"
                             slug={node.fields.slug}
-                            imageSrc={node.frontmatter.image.childImageSharp.resolutions.src}
+                            image={node.frontmatter.image.childImageSharp.fluid}
                             key={node.id}
                           />
                         )

@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import get from 'lodash/get'
 import Layout from '../components/layout';
 import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 import _ from 'lodash'
 
 
@@ -15,12 +16,12 @@ class BlogPostTemplate extends React.Component {
 
     let byAuthors = post.frontmatter.authors.map((author, index, array) => {
       if (index === 0) {
-        return <Link to={author.fields.slug}>{author.first_name} {author.last_name}</Link>
+        return <Link key={author.id} to={author.fields.slug}>{author.first_name} {author.last_name}</Link>
       } else {
         if (index === (array.length - 1)) {
-          return <> and <Link to={author.fields.slug}>{author.first_name} {author.last_name}</Link></>
+          return <> and <Link key={author.id} to={author.fields.slug}>{author.first_name} {author.last_name}</Link></>
         } else {
-          return <>, <Link>{author.first_name} {author.last_name}</Link></>
+          return <>, <Link key={author.id}>{author.first_name} {author.last_name}</Link></>
         }
       }
     })
@@ -55,8 +56,7 @@ class BlogPostTemplate extends React.Component {
                   return (
                     <div className="inner" key={author.id}>
                       <Link to={author.fields.slug} className="image spotlight-image">
-                        <img src={author.avatar.childImageSharp.resolutions.src}
-                             alt={author.first_name} className="p-image"/>
+                        <Img fluid={author.avatar.childImageSharp.fluid} className="p-image" alt={author.first_name}/>
                       </Link>
 
                       <div className="content">
@@ -102,8 +102,8 @@ export const pageQuery = graphql`
           }
           avatar {
             childImageSharp {
-              resolutions(width: 200, height: 200, quality:100) {
-                src
+              fluid(maxWidth: 200, quality:100) {
+                ...GatsbyImageSharpFluid
               }
             }
           }

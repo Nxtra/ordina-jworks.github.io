@@ -14,6 +14,7 @@ const AboutPage = () => (
         ) {
           edges {
             node {
+              id
               fields {
                 slug
               }
@@ -28,8 +29,8 @@ const AboutPage = () => (
               github
               avatar {
                 childImageSharp {
-                  resolutions(width: 200, height: 200, quality:100) {
-                    src
+                  fluid(maxWidth: 200, quality:100) {
+                    ...GatsbyImageSharpFluid
                   }
                 }
               }
@@ -59,8 +60,10 @@ const AboutPage = () => (
                       return (
                         <div className="team-member">
                           <TeamMemberImage
+                            key={node.id}
                             firstName={node.first_name}
-                            imageSrc={node.avatar.childImageSharp.resolutions.src}
+                            // imageSrc={node.avatar.childImageSharp.resolutions.src}
+                            image={node.avatar.childImageSharp.fluid}
                             slug={node.fields.slug}
                           />
                           <h1 className="team-member-name"><Link to={node.fields.slug}>{fullName}</Link></h1>

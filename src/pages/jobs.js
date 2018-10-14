@@ -22,8 +22,8 @@ const JobsPage = () => (
                 subtitle
                 image {
                   childImageSharp {
-                    resolutions(width: 500, height: 293, quality:100) {
-                      src
+                    fluid(maxWidth: 500, quality: 100) {
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }
@@ -76,7 +76,7 @@ const JobsPage = () => (
                           subtitle={node.frontmatter.subtitle}
                           action="Tell me more"
                           slug={node.fields.slug}
-                          imageSrc={node.frontmatter.image.childImageSharp.resolutions.src}
+                          image={node.frontmatter.image.childImageSharp.fluid}
                           key={node.id}
                         />
                       )

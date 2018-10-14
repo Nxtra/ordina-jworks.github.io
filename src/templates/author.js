@@ -23,7 +23,7 @@ class AuthorTemplate extends React.Component {
                 <div className="banner-team-member-info">
                   <TeamMemberImage
                     firstName={author.first_name}
-                    imageSrc={author.avatar.childImageSharp.resolutions.src}
+                    image={author.avatar.childImageSharp.fluid}
                     slug={author.fields.slug}
                     alumnus={author.inactive}
                   />
@@ -89,8 +89,8 @@ export const pageQuery = graphql`
       inactive
       avatar {
         childImageSharp {
-          resolutions(width: 200, height: 200, quality:100) {
-            src
+          fluid(maxWidth: 200, quality:100) {
+            ...GatsbyImageSharpFluid
           }
         }
       }

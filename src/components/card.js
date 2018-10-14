@@ -1,11 +1,12 @@
 import React from 'react'
 
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Card = props => (
   <article>
     <Link to={props.slug}>
-      <img src={props.imageSrc} className="article-image" alt={props.title}/>
+      <Img fluid={props.image} className="article-image" />
       <h3 className="major">{props.title}</h3>
     </Link>
     <p>{props.subtitle}</p>
