@@ -56,7 +56,7 @@ const Footer = () => (
     <div className="copyright">
       &copy; {new Date().getFullYear()} Ordina JWorks. All rights reserved.
       <br/> Disclaimer: Opinions expressed on this blog reflect the writer's views and not the position of Ordina
-      <img id="analyticsImg" alt="analytics img" src="" width="1" height="1" style={{ border: 0 }}/>
+      <img id="analyticsImg" alt="analytics img" src="" width="1" height="1" style={{ border: 0 }}/>gats
     </div>
   </footer>
 )

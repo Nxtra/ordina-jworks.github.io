@@ -14,6 +14,7 @@ exports.createPages = ({ actions, graphql }) => {
 
   return new Promise((resolve, reject) => {
     const blogPostTemplate = path.resolve('./src/templates/blog-post.js')
+    const blogPaginatedTemplate = path.resolve('./src/templates/blog-paginated.js')
     const jobTemplate = path.resolve('./src/templates/job.js')
     const authorTemplate = path.resolve('./src/templates/author.js')
     const categoryTemplate = path.resolve('./src/templates/category.js')
@@ -108,6 +109,22 @@ exports.createPages = ({ actions, graphql }) => {
             component: authorTemplate,
             context: {
               slug: author.node.fields.slug,
+            },
+          })
+        })
+
+        const postsPerPage = 4
+        const numPages = Math.ceil(posts.length / postsPerPage)
+
+        Array.from({ length: numPages }).forEach((_, i) => {
+          createPage({
+            path: i === 0 ? `/` : `/${i + 1}`,
+            component: blogPaginatedTemplate,
+            context: {
+              limit: postsPerPage,
+              skip: i * postsPerPage,
+              numPages,
+              currentPage: i + 1
             },
           })
         })

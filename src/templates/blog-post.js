@@ -56,7 +56,7 @@ class BlogPostTemplate extends React.Component {
                       </Link>
 
                       <div className="content">
-                        <p>{author.bio}</p>
+                        <p dangerouslySetInnerHTML={{__html: author.bio}}></p>
                       </div>
                     </div>
                   )
